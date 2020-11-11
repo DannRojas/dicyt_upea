@@ -1,0 +1,392 @@
+<div class="container">
+  <div class="row my-4">
+    <div class="col-sm-10 my-4 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Nuevo usuario</h5>
+          <br />
+
+          <mat-horizontal-stepper [linear]="true" #stepper>
+            <mat-step [stepControl]="userForm">
+              <form #userForm="ngForm" (ngSubmit)="nextAdmin()">
+                <ng-template matStepLabel>Formulario Usuario</ng-template>
+                <div class="row">
+                  <mat-form-field class="col-md-4">
+                    <mat-label>CI</mat-label>
+                    <input matInput name="ci" id="ci" [(ngModel)]="register.user.ci" #ci="ngModel" required minlength="6"/>
+                    <mat-error *ngIf="ci.hasError('required')">El ci es requerido</mat-error>
+                    <mat-error *ngIf="ci.hasError('minlength')">El ci debe tener almenos 6 caracteres</mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="col-md-4">
+                    <mat-label>Nombres</mat-label>
+                    <input matInput name="names" id="names" [(ngModel)]="register.user.names" #names="ngModel" required
+                    />
+                    <mat-error *ngIf="names.invalid"
+                      >El nombre es requerido</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field class="col-md-4">
+                    <mat-label>Apellidos</mat-label>
+                    <input matInput name="last_name" id="last_name" [(ngModel)]="register.user.last_name" #last_name="ngModel" required/>
+                    <mat-error *ngIf="last_name.invalid">El apellido es requerido</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="row">
+                  <mat-form-field class="col-md-4">
+                    <mat-label>Celular</mat-label>
+                    <input matInput name="phone" id="phone" [(ngModel)]="register.user.phone"/>
+                  </mat-form-field>
+                  <mat-form-field class="col-md-4">
+                    <mat-label>Nombre de usuario</mat-label>
+                    <input
+                      matInput
+                      name="username"
+                      [(ngModel)]="register.user.username"
+                      #username="ngModel"
+                      required
+                      minlength="5"
+                    />
+                    <mat-error *ngIf="username.hasError('required')"
+                      >El nombre de usuario es requerido</mat-error
+                    >
+                    <mat-error *ngIf="username.hasError('minlength')"
+                      >El nombre de usuario debe tener almenos 5
+                      caracteres</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field class="col-md-4">
+                    <mat-label>Email</mat-label>
+                    <input
+                      matInput
+                      name="email"
+                      id="email"
+                      [(ngModel)]="register.user.email"
+                      #emailU="ngModel"
+                      required
+                      email
+                    />
+                    <mat-error *ngIf="emailU.hasError('required')"
+                      >El email es requerido</mat-error
+                    >
+                    <mat-error *ngIf="emailU.hasError('email')"
+                      >Email incorrecto</mat-error
+                    >
+                  </mat-form-field>
+                </div>
+                <div class="row">
+                  <mat-form-field class="col-md-4 mx-auto">
+                    <mat-label>Seleccione un rol</mat-label>
+                    <mat-select
+                      [disabled]="isUpdate"
+                      name="type"
+                      [(ngModel)]="register.user.type"
+                      (ngModelChange)="observableType($event)"
+                      #type="ngModel"
+                      required
+                    >
+                      <mat-option>Vacio</mat-option>
+                      <mat-option
+                        *ngFor="let role of roles"
+                        [value]="role.value"
+                        >{{ role.valor }}</mat-option
+                      >
+                    </mat-select>
+                    <mat-error *ngIf="type.invalid"
+                      >El rol del usuario es requerido</mat-error
+                    >
+                  </mat-form-field>
+
+                  <mat-form-field class="col-md-4 mx-auto">
+                    <mat-label>Contraseña</mat-label>
+                    <input
+                      matInput
+                      [type]="hide ? 'password' : 'text'"
+                      name="password"
+                      [(ngModel)]="register.user.password"
+                      #password="ngModel"
+                      required
+                      minlength="8"
+                    />
+                    <button
+                      type="button"
+                      mat-icon-button
+                      matSuffix
+                      (click)="hide = !hide"
+                      [attr.aria-label]="'Hide password'"
+                      [attr.aria-pressed]="hide"
+                    >
+                      <mat-icon>{{
+                        hide ? "visibility_off" : "visibility"
+                      }}</mat-icon>
+                    </button>
+                    <mat-error *ngIf="password.hasError('required')"
+                      >La contraseña es requerida</mat-error
+                    >
+                    <mat-error *ngIf="password.hasError('minlength')"
+                      >la contraseña debe tener almenos 8 caracteres</mat-error
+                    >
+                  </mat-form-field>
+                </div>
+                <div class="ml-auto mt-3">
+                  <button
+                    mat-button
+                    matStepperNext
+                    [disabled]="userForm.invalid"
+                    class="btn btn-primary buttn"
+                  >
+                    Siguiente
+                  </button>
+                </div>
+              </form>
+            </mat-step>
+            <!-- /step 1 *************************************** -->
+            <mat-step [stepControl]="investigatorForm || auxForm || responsableForm">
+              <ng-template matStepLabel>Formulario Rol</ng-template>
+              <form #investigatorForm="ngForm" *ngIf="register.user.type === 'investigator'">
+                <h2>Datos Investigador</h2>
+                <div class="row">
+                  <mat-form-field class="col-md-4 mx-auto">
+                    <mat-label>Seleccione el tipo</mat-label>
+                    <mat-select name="typeI" [(ngModel)]="register.investigator.type" #typeI="ngModel" required>
+                      <mat-option>Vacio</mat-option>
+                      <mat-option value="tutor">Tutor</mat-option>
+                      <mat-option value="coordinator">Coordinador</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="typeI.invalid">El tipo del investigador es requerido</mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="col-md-4 mx-auto">
+                    <mat-label>Seleccione el turno</mat-label>
+                    <mat-select
+                      name="turn"
+                      [(ngModel)]="register.investigator.turn"
+                      #turn="ngModel"
+                      required
+                    >
+                      <mat-option>Vacio</mat-option>
+                      <mat-option
+                        *ngFor="let turn of turns"
+                        [value]="turn.value"
+                        >{{ turn.valor }}</mat-option
+                      >
+                    </mat-select>
+                    <mat-error *ngIf="turn.invalid"
+                      >El turno es requerido</mat-error
+                    >
+                  </mat-form-field>
+
+                  <mat-form-field class="col-md-4 mx-auto">
+                    <mat-label>Gestión del investigador</mat-label>
+                    <mat-select
+                      name="year"
+                      [(ngModel)]="register.investigator.year"
+                      #year="ngModel"
+                      required
+                    >
+                      <mat-option>Vacio</mat-option>
+                      <mat-option *ngFor="let year of years" [value]="year">{{
+                        year
+                      }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="year.invalid"
+                      >El año es requerido</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field class="col-md-4 mx-auto">
+                    <mat-label>Carrera o Instituto</mat-label>
+                    <mat-select name="institute_code" [(ngModel)]="register.investigator.institute_code" #institute_code="ngModel" required>
+                      <mat-option>Vacio</mat-option>
+                      <mat-option *ngFor="let institute of institutes" [value]="institute.institute_code">{{ institute.institute_name }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="year.invalid">La institución es requerida</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="mx-auto mt-4">
+                  <button matStepperPrevious class="btn btn-primary buttn">
+                    Anterior
+                  </button>
+                  <button matStepperNext class="btn btn-primary buttn">
+                    Siguiente
+                  </button>
+                </div>
+              </form>
+
+              <form #auxForm="ngForm" *ngIf="register.user.type === 'aux'">
+                <h2>Datos Auxiliar</h2>
+                <div class="row">
+                  <mat-form-field class="col-md-4 mx-auto">
+                    <mat-label>Seleccione el turno</mat-label>
+                    <mat-select
+                      name="turnA"
+                      [(ngModel)]="register.auxiliar.turn"
+                      #turnA="ngModel"
+                      required
+                    >
+                      <mat-option>Vacio</mat-option>
+                      <mat-option
+                        *ngFor="let turn of turns"
+                        [value]="turn.value"
+                        >{{ turn.valor }}</mat-option
+                      >
+                    </mat-select>
+                    <mat-error *ngIf="turnA.invalid"
+                      >El turno es requerido</mat-error
+                    >
+                  </mat-form-field>
+
+                  <mat-form-field class="col-md-4 mx-auto">
+                    <mat-label>Gestión del auxiliar</mat-label>
+                    <mat-select
+                      name="yearA"
+                      [(ngModel)]="register.auxiliar.year"
+                      #yearA="ngModel"
+                      required
+                    >
+                      <mat-option>Vacio</mat-option>
+                      <mat-option *ngFor="let year of years" [value]="year">{{
+                        year
+                      }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="yearA.invalid"
+                      >El año es requerido</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field class="col-md-4 mx-auto">
+                    <mat-label>Carrera o Instituto</mat-label>
+                    <mat-select
+                      name="institute_code"
+                      [(ngModel)]="register.auxiliar.institute_code"
+                      #institute_code="ngModel"
+                      required
+                    >
+                      <mat-option>Vacio</mat-option>
+                      <mat-option
+                        *ngFor="let institute of institutes"
+                        [value]="institute.institute_code"
+                        >{{ institute.institute_name }}</mat-option
+                      >
+                    </mat-select>
+                    <mat-error *ngIf="institute_code.invalid"
+                      >La institución es requerida</mat-error
+                    >
+                  </mat-form-field>
+                </div>
+                <div class="mx-auto mt-4">
+                  <button matStepperPrevious class="btn btn-primary buttn">
+                    Anterior
+                  </button>
+                  <button matStepperNext class="btn btn-primary buttn">
+                    Siguiente
+                  </button>
+                </div>
+              </form>
+
+              <form
+                #responsableForm="ngForm"
+                *ngIf="register.user.type === 'responsable'"
+              >
+                <h2>Datos Responsable</h2>
+                <div class="row">
+                  <mat-form-field class="col-md-4 mx-auto">
+                    <mat-label>Gestión del responsable</mat-label>
+                    <mat-select
+                      name="yearR"
+                      [(ngModel)]="register.responsable.year"
+                      #yearR="ngModel"
+                      [required]="!isAdmin"
+                    >
+                      <mat-option>Vacio</mat-option>
+                      <mat-option *ngFor="let year of years" [value]="year">{{
+                        year
+                      }}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="yearR.invalid"
+                      >El año es requerido</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field class="col-md-4 mx-auto">
+                    <mat-label>Proyecto IDH</mat-label>
+                    <mat-select
+                      name="project_code"
+                      [(ngModel)]="register.responsable.project_code"
+                      #project_code="ngModel"
+                      [required]="!isAdmin"
+                    >
+                      <mat-option>Vacio</mat-option>
+                      <mat-option
+                        *ngFor="let projectIDH of projectsIDH"
+                        [value]="projectIDH.project_code"
+                        >{{ projectIDH.project_name }}</mat-option
+                      >
+                    </mat-select>
+                    <mat-error *ngIf="yearR.invalid"
+                      >Proyecto IDH es requerido</mat-error
+                    >
+                  </mat-form-field>
+                </div>
+                <div class="mx-auto mt-4">
+                  <button matStepperPrevious class="btn btn-primary buttn">
+                    Anterior
+                  </button>
+                  <button matStepperNext class="btn btn-primary buttn">
+                    Siguiente
+                  </button>
+                </div>
+              </form>
+              <button #btnStepTwoPrev hidden matStepperPrevious>
+                Anterior
+              </button>
+              <button #btnStepTwoNext hidden matStepperNext>Siguiente</button>
+            </mat-step>
+            <!-- /step 2 ************************************************ -->
+            <mat-step>
+              <ng-template matStepLabel>Confirmar</ng-template>
+              <div>
+                <ul>
+                  <li>CI: {{ register.user.ci }}</li>
+                  <li>Nombres: {{ register.user.names }}</li>
+                  <li>Apellidos: {{ register.user.last_name }}</li>
+                  <li>Celular: {{ register.user.phone }}</li>
+                  <li>Nombre de usuario: {{ register.user.username }}</li>
+                  <li>Email: {{ register.user.email }}</li>
+                  <li>Rol: {{ register.user.type | traductor }}</li>
+                  <span [ngSwitch]="register.user.type">
+                    <span *ngSwitchCase="'responsable'">
+                      <li>Gestión: {{ register.responsable.year }}</li>
+                    </span>
+                    <span *ngSwitchCase="'investigator'">
+                      <li>
+                        Tipo: {{ register.investigator.type | traductor }}
+                      </li>
+                      <li>
+                        Turno: {{ register.investigator.turn | traductor }}
+                      </li>
+                      <li>Gestión: {{ register.investigator.year }}</li>
+                    </span>
+                    <span *ngSwitchCase="'aux'">
+                      <li>Turno: {{ register.auxiliar.turn | traductor }}</li>
+                      <li>Gestión: {{ register.auxiliar.year }}</li>
+                    </span>
+                  </span>
+                </ul>
+                <button #btnReset hidden (click)="stepper.reset()">
+                  Reset
+                </button>
+                <button
+                  matStepperPrevious
+                  (click)="previousAdmin()"
+                  class="btn btn-primary buttn"
+                >
+                  Anterior
+                </button>
+                <button class="btn btn-primary buttn" (click)="addUser()">
+                  Finalizar
+                </button>
+              </div>
+            </mat-step>
+          </mat-horizontal-stepper>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+.white-text {
+    color: white;
+}
+
+.blue-text {
+    color: rgb(42, 248, 238);
+}
+
+.transparente {
+    position: relative;
+    max-width: 600px;
+    padding: 20px;
+    background: rgba(255, 255, 255, .2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 5);
+}
+
+.zoom {
+    transition: transform 0.2s;
+}
+
+.zoom:hover {
+    transform: scale(1.1);
+}

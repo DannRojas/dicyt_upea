@@ -1,0 +1,36 @@
+{
+  "name": "auxiliar",
+  "plural": "auxiliaries",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "auxiliarCode": {
+      "type": "number",
+      "id": true
+    },
+    "turn": {
+      "type": "string",
+      "required": true
+    },
+    "year": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "auxiliarProjects": {
+      "type": "hasMany",
+      "model": "auxiliar_project",
+      "foreignKey": "auxiliarCode",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

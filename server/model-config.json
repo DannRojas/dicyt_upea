@@ -1,0 +1,79 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "mysql",
+    "public": false
+  },
+  "AccessToken": {
+    "dataSource": "mysql",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mysql",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mysql",
+    "public": false,
+    "options": {
+      "strictObjectIDCoercion": true
+    }
+  },
+  "Role": {
+    "dataSource": "mysql",
+    "public": false
+  },
+  "user": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "idh-project": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "responsable": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "container": {
+    "dataSource": "files_local",
+    "public": true
+  },
+  "investigation_project": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "career_institute": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "auxiliar": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "investigator": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "auxiliar_project": {
+    "dataSource": "mysql",
+    "public": true
+  },
+  "activity": {
+    "dataSource": "mysql",
+    "public": true
+  }
+}

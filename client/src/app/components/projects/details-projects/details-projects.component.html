@@ -1,0 +1,51 @@
+<!-- <div class="container pt-5">
+    <div class="d-block text-center mb-4">
+        <span class="white-text badge badge-pill badge-title d-block">
+            <p class="title mx-auto">Detalle Proyecto IDH</p>
+        </span>
+    </div>
+
+    <div class="container-fluid card mb-5">
+        <form class="row mt-2" #instituteForm="ngForm" (ngSubmit)="onAddOrUpdate()">
+            <div class="col-lg-6 p-0 px-2 view mb-2">
+                <input type="file" (change)="onFileSelected($event)" accept='image/*' class="d-none" #fileInput>
+                <img [src]="institute?.pathImage" class="img-fluid">
+                <div class="mask">
+                    <button mat-raised-button [disabled]="isDisabled" type="button" color="primary" (click)="fileInput.click()">
+                        Subir Imagen <mat-icon>backup</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6 my-auto">
+                <div class="row text-center">
+                    <h6 class="container mb-0 w-100">
+                        <mat-form-field class="w-75">
+                            <mat-label>Nombre de la institución</mat-label>
+                            <input matInput [disabled]="isDisabled" placeholder="Nombre de la institución" name="institute_name" [(ngModel)]="institute.institute_name" #institute_name="ngModel" required>
+                            <mat-error *ngIf="institute_name.invalid">El nombre es requerido</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="w-75">
+                            <mat-label>ubicación</mat-label>
+                            <input type="text" matInput [disabled]="isDisabled" placeholder="Ubicación de la institución" name="ubication" [(ngModel)]="institute.ubication" #ubication="ngModel" required>
+                            <mat-error *ngIf="ubication.invalid">Ubicación requerida</mat-error>
+                        </mat-form-field>
+                        <mat-form-field class="w-75">
+                            <mat-label>Tipo</mat-label>
+                            <mat-select name="type" [disabled]="isDisabled" [(ngModel)]="institute.type" #type="ngModel" required>
+                                <mat-option>Ninguno</mat-option>
+                                <mat-option value="instituto">Institución</mat-option>
+                                <mat-option value="carrera">Carrera</mat-option>
+                                <mat-option value="otro">Otro</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="type.hasError('required')">El tipo de institución es requerido</mat-error>
+                        </mat-form-field>
+                    </h6>
+                    <div class="mt-2 mx-auto">
+                        <button mat-raised-button type="button" color="primary" class="mr-2" (click)="isDisabled = !isDisabled">{{isDisabled ? 'activar edición': 'desactivar edición'}}</button>
+                        <button mat-raised-button type="submit" color="primary">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div> -->

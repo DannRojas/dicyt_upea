@@ -1,0 +1,16 @@
+<button #buttonOpenModal type="button" hidden data-toggle="modal" data-target=".sm-modal">Small modal</button>
+
+<div class="modal fade sm-modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button #buttonCloseModal type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body text-center">
+                <h3 class="mb-2">{{message}}</h3>
+                <button class="btn btn-purple white-text mb-3" (click)="confirm()" mat-raised-button color="primary">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>

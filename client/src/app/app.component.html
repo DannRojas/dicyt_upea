@@ -1,0 +1,117 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+    <mat-toolbar color="primary" class="example-toolbar">
+        <button mat-icon-button *ngIf="isLogin" (click)="opened = !opened"><mat-icon>menu</mat-icon></button>
+        <!-- <h1 class="example-app-name"><a class="white-text" routerLink="/">DICYT-UPEA</a></h1> -->
+        <img src="../../../assets/img/logo.png" routerLink="/home" width="8%" height="80%" class="d-inline-block align-top img-config" alt="">
+        <button mat-button [matMenuTriggerFor]="belowMenu"><i class="fas fa-puzzle-piece"></i>  DICYT</button>
+        <mat-menu #belowMenu="matMenu" yPosition="below">
+            <button mat-menu-item routerLink="/identity">Quienes somos</button>
+            <button mat-menu-item routerLink="/vicerrectorado">Vicerrectorado</button>
+            <button mat-menu-item routerLink="/director">Director DICyT</button>
+            <button mat-menu-item routerLink="/personal">Personal Administrativo</button>
+            <button mat-menu-item routerLink="/personal">Personal Tecnico</button>
+        </mat-menu>
+        <button mat-button><i class="far fa-newspaper"></i>  Publicaciones</button>
+        <button mat-button [matMenuTriggerFor]="eventos"><i class="fas fa-calendar-alt"></i> Eventos Cientificos</button>
+        <mat-menu #eventos="matMenu" yPosition="below">
+            <button mat-menu-item routerLink="">Congresos DICyT</button>
+            <button mat-menu-item routerLink="">Cursos de actualizacion</button>
+            <button mat-menu-item routerLink="">Seminarios DICyT</button>
+        </mat-menu>
+        <button mat-button><i class="fas fa-phone-alt"></i>  Contáctanos</button>
+
+
+
+        <span class="example-spacer"></span>
+        <a *ngIf="!isLogin" class="ml-auto" role="button" data-toggle="modal" data-target="#loginModal" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-sign-in-alt"></i> Inicio de Sesion
+        </a>
+        <button class="ml-auto" mat-button *ngIf="isLogin" [matMenuTriggerFor]="menu">{{user.names}}</button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item>Perfil</button>
+            <button mat-menu-item (click)="logout()">Cerrar sesión</button>
+        </mat-menu>
+    </mat-toolbar>
+    <!-- ***************************************** -->
+
+    <app-login></app-login>
+    <app-confirm></app-confirm>
+
+    <!-- ************************************** -->
+    <mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        <mat-sidenav #sidenav [(opened)]="opened" [mode]="mobileQuery.matches ? 'over' : 'side'" [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+
+            <!-- ++++++++INICIO INVESTIGATION+++++++++++ -->
+            <mat-nav-list>
+                <button mat-button [matMenuTriggerFor]="animals"><i class="fas fa-project-diagram"></i>  Proyectos de Investigacion</button>
+                <mat-menu #animals="matMenu">
+                    <button mat-menu-item [matMenuTriggerFor]="vertebrates">Universidad</button>
+                    <button mat-menu-item [matMenuTriggerFor]="invertebrates">Institución </button>
+                </mat-menu>
+
+                <mat-menu #vertebrates="matMenu">
+                    <button mat-menu-item [matMenuTriggerFor]="fish">Ing. Sistemas</button>
+                    <button mat-menu-item [matMenuTriggerFor]="amphibians">Ing. Electrónica</button>
+                    <button mat-menu-item [matMenuTriggerFor]="reptiles">Ing. Autotrónica</button>
+                </mat-menu>
+
+                <mat-menu #invertebrates="matMenu">
+                    <button mat-menu-item [matMenuTriggerFor]="fish2">Derecho</button>
+                    <button mat-menu-item [matMenuTriggerFor]="amphibians2">Psicologia</button>
+                </mat-menu>
+
+                <mat-menu #fish="matMenu">
+                    <button mat-menu-item routerLink="investigation">Inteligencia Artificial</button>
+                    <button mat-menu-item routerLink="investigation">Nuevas tecnologias</button>
+                    <button mat-menu-item>Nuevos Lenguajes</button>
+                </mat-menu>
+
+                <mat-menu #amphibians="matMenu">
+                    <button mat-menu-item>Sensor de humedad</button>
+                    <button mat-menu-item>Sensor Rayos X</button>
+                </mat-menu>
+
+                <mat-menu #reptiles="matMenu">
+                    <button mat-menu-item>Seguridad con google maps</button>
+                </mat-menu>
+
+                <mat-menu #fish2="matMenu">
+                    <button mat-menu-item>Inteligencia Artificial</button>
+                    <button mat-menu-item>Nuevas tecnologias</button>
+                    <button mat-menu-item>Nuevos Lenguajes</button>
+                </mat-menu>
+                <mat-menu #amphibians2="matMenu">
+                    <button mat-menu-item>Sensor de humedad</button>
+                    <button mat-menu-item>Sensor Rayos X</button>
+                </mat-menu>
+            </mat-nav-list>
+            <!-- ++++++++++++FIN INVESTIGATION+++++++++++ -->
+            <mat-nav-list>
+                <button mat-button routerLink="project/idh"><i class="fas fa-tasks"></i>  Proyectos IDH</button>
+            </mat-nav-list>
+            <mat-nav-list>
+                <a mat-list-item routerLink="/institute"><i class="fas fa-university"></i> Carrera o instituto</a>
+            </mat-nav-list>
+            <mat-nav-list>
+                <a mat-list-item routerLink="user/user-list"><i class="fas fa-user-plus"></i> Usuarios</a>
+            </mat-nav-list>
+            <mat-nav-list>
+
+                <a mat-list-item>Informes  <button mat-raised-button color="warn" matBadge="8" matBadgePosition="before" matBadgeColor="accent"> + PDF</button></a>
+
+            </mat-nav-list>
+
+
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <div class="background">
+                <div class="mask">
+                    <button type="button" hidden #toogle (click)="sidenav.toggle()"></button>
+                    <router-outlet></router-outlet>
+                    <app-footer></app-footer>
+                </div>
+            </div>
+        </mat-sidenav-content>
+    </mat-sidenav-container>
+</div>

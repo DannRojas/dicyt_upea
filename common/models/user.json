@@ -1,0 +1,77 @@
+{
+  "name": "user",
+  "plural": "users",
+  "base": "User",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id_user": {
+      "type": "number",
+      "id": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "ci": {
+      "type": "string",
+      "required": true
+    },
+    "names": {
+      "type": "string",
+      "required": true
+    },
+    "last_name": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "responsables": {
+      "type": "hasOne",
+      "model": "responsable",
+      "foreignKey": "id_user",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "auxiliars": {
+      "type": "hasOne",
+      "model": "auxiliar",
+      "foreignKey": "id_user",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "investigators": {
+      "type": "hasOne",
+      "model": "investigator",
+      "foreignKey": "id_user",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

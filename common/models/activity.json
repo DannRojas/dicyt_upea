@@ -1,0 +1,39 @@
+{
+  "name": "activity",
+  "plural": "activityes",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "activity_code": {
+      "type": "number",
+      "id": true
+    },
+    "start_date": {
+      "type": "date",
+      "required": true
+    },
+    "ending_date": {
+      "type": "date",
+      "required": true
+    },
+    "finished": {
+      "type": "boolean",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "project_code": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

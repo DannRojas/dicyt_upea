@@ -1,0 +1,40 @@
+{
+  "name": "investigator",
+  "plural": "investigators",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "investigatorCode": {
+      "type": "number",
+      "id": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "turn": {
+      "type": "string",
+      "required": true
+    },
+    "year": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "investigationProjects": {
+      "type": "hasMany",
+      "model": "investigation_project",
+      "foreignKey": "investigatorCode",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

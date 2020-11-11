@@ -1,0 +1,130 @@
+.white {
+    color: white;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+.card-css:hover {
+    transform: translateY(-20px);
+}
+
+.scroll {
+    text-align: center;
+    margin-top: 5px;
+    display: flex;
+    width: 100%;
+    height: 45px;
+    font-size: 40px;
+    line-height: 40px;
+    color: white;
+    overflow: hidden;
+}
+
+ul {
+    list-style: none;
+    padding-left: 10px;
+    animation: cambiar 7s infinite;
+}
+
+@keyframes cambiar {
+    0% {
+        margin-top: 0;
+    }
+    20% {
+        margin-top: 0;
+    }
+    25% {
+        margin-top: -40px;
+    }
+    50% {
+        margin-top: -40px;
+    }
+    55% {
+        margin-top: -80px;
+    }
+    80% {
+        margin-top: -80px;
+    }
+    85% {
+        margin-top: -40px;
+    }
+    95% {
+        margin-top: -40px;
+    }
+    100% {
+        margin-top: 0;
+    }
+}
+
+.zoom {
+    transition: transform 0.2s;
+}
+
+.zoom:hover {
+    transform: scale(1.5);
+}
+
+// ESTILOS PARA IMAGENES 180 GRADOS    ---- INICIO
+.wrap {
+    width: 1100px;
+    margin: 50px auto;
+    display: flex;
+    justify-content: center;
+}
+
+.tarjeta-wrap {
+    margin: 10px;
+    -webkit-perspective: 800;
+    perspective: 800;
+}
+
+.tarjeta {
+    width: 300px;
+    height: 350px;
+    background-color: orange;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: .7s ease;
+    -webkit-box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 0.65);
+    -moz-box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 0.65);
+    box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 0.65);
+}
+
+.adelante,
+.atras {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.adelante {
+    width: 100%;
+}
+
+.atras {
+    transform: rotateY(180deg);
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #fff;
+    font-family: "open sans";
+}
+
+.tarjeta-wrap:hover .tarjeta {
+    transform: rotateY(180deg);
+}
+
+.card1 {
+    background-image: url(../../../assets/img/img2.jpg);
+    background-size: cover;
+}
+
+// ESTILOS PARA IMAGENES 180 GRADOS    ---- FIN

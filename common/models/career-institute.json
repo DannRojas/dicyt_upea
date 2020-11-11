@@ -1,0 +1,68 @@
+{
+  "name": "career_institute",
+  "plural": "careers_institutes",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "institute_code": {
+      "type": "number",
+      "id": true
+    },
+    "institute_name": {
+      "type": "string",
+      "required": true
+    },
+    "ubication": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "investigationProjects": {
+      "type": "hasMany",
+      "model": "investigation_project",
+      "foreignKey": "institute_code",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "auxiliars": {
+      "type": "hasMany",
+      "model": "auxiliar",
+      "foreignKey": "institute_code",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "investigators": {
+      "type": "hasMany",
+      "model": "investigator",
+      "foreignKey": "institute_code",
+      "options": {
+        "nestRemoting": true
+      }
+    },
+    "idh-projects": {
+      "type": "hasMany",
+      "model": "idh-project",
+      "foreignKey": "institute_code",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

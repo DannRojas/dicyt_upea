@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 mt-5" *ngFor="let investigation of investigations">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>{{investigation.research_name}}</mat-card-title>
+          <mat-card-subtitle>{{investigation.research_topic}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="'http://localhost:3000/api/containers/images/download/'+investigation.image" height="10%" width="20%" class="zoom"/>
+        <mat-card-content>
+          <p>Porcentaje de avance:</p>
+          <h1>
+            <mat-progress-bar mode="determinate" [value]="investigation.percent_completion"></mat-progress-bar>
+          </h1>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button class="mr-2" [routerLink]="'/investigation/'+investigation.investigation_code">Modificar</button>
+          <button mat-button [routerLink]="'/investigation-detail/'+investigation.investigation_code">Detalles</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

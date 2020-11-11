@@ -1,0 +1,52 @@
+<div class="modal fade  " id="loginModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm  " role="document">
+        <div class="modal-content bg-img ">
+            <!-- <img src="../../../../assets/img/home/login.jpg" alt="" height="20%" width="20%"> -->
+            <div class="modal-header">
+                <h5 class="modal-title title" id="exampleModalLabel">Logín</h5>
+                <button type="button" (click)="onResetForm()" class="close" data-dismiss="modal" aria-label="Close">
+                    
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form class="container" #formLogin="ngForm" (ngSubmit)="onLogin()">
+                    <div class="row">
+                        <div class="col col-12">
+                            <mat-form-field class="w-100">
+                                <mat-label>Nombre de Usuario</mat-label>
+                                <input matInput name="username" #username="ngModel" id="username" placeholder="Ej. Hvillegas" [(ngModel)]="user.username" minlength="5" maxlength="10" required>
+                                <mat-error *ngIf="username.hasError('required')">Nombre de usuario es requerido</mat-error>
+                                <mat-error *ngIf="username.hasError('minlength')">Mínimo de 5 caracteres</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-12">
+                            <mat-form-field class="w-100">
+                                <mat-label>Enter your password</mat-label>
+                                <input matInput [type]="hide ? 'password' : 'text'" id="password" name="password" #password="ngModel" [(ngModel)]="user.password" required minlength="5" maxlength="12">
+                                <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                </button>
+                                <mat-error *ngIf="password.hasError('required')">Contraseña es requerido</mat-error>
+                                <mat-error *ngIf="password.hasError('minlength')">Mínimo de 5 caracteres</mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div *ngIf="isError" class="row">
+                        <div class="mx-auto">
+                            <h5><span class="badge badge-pill badge-danger">Usuario o contraseña incorrectas</span></h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-12 d-flex">
+                            <button type="submit" [disabled]="formLogin.invalid" class="btn btn-primary btn-block">Aceptar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

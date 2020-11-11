@@ -1,0 +1,72 @@
+{
+  "name": "investigation_project",
+  "plural": "investigations_projects",
+  "base": "PersistedModel",
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "investigation_code": {
+      "type": "number",
+      "id": true
+    },
+    "research_name": {
+      "type": "string",
+      "required": true
+    },
+    "research_topic": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "string",
+      "required": true
+    },
+    "investment_amount": {
+      "type": "number",
+      "required": true
+    },
+    "start_date": {
+      "type": "date",
+      "required": true
+    },
+    "ending_date": {
+      "type": "date",
+      "required": true
+    },
+    "state": {
+      "type": "boolean",
+      "required": true
+    },
+    "image": {
+      "type": "string",
+      "required": true
+    },
+    "number_activities": {
+      "type": "number",
+      "required": true
+    },
+    "percent_completion": {
+      "type": "number",
+      "default": 0
+    },
+    "interinstitutional_agreement": {
+      "type": "string",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "auxiliarProjects": {
+      "type": "hasMany",
+      "model": "auxiliar_project",
+      "foreignKey": "investigation_code",
+      "options": {
+        "nestRemoting": true
+      }
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

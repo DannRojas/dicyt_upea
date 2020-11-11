@@ -1,0 +1,43 @@
+<div class="container pt-5">
+  <table class="table table-striped table-dark table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Dirección</th>
+        <th scope="col">Tipo</th>
+        <th scope="col" class="align-middle text-right">
+          <span
+            data-toggle="tooltip"
+            data-placement="top"
+            title="Nuevo Instituto"
+            routerLink="/institute/0"
+            ><i class="fas fa-plus-circle xl"></i
+          ></span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let institute of institutes">
+        <th scope="row">
+          <a
+            [routerLink]="'/investigations/' + institute.institute_code"
+            (click)="setInstituteCode(institute.institute_code)"
+            ><img [src]="institute?.pathImage" class="img-fluid img-list"
+          /></a>
+        </th>
+        <td>{{ institute.institute_name }}</td>
+        <td>{{ institute.ubication }}</td>
+        <td>{{ institute.type }}</td>
+        <td class="align-middle">
+          <span class="mr-3" data-toggle="tooltip" data-placement="top" title="Proyectos" [routerLink]="'/investigations/' + institute.institute_code"
+          (click)="setInstituteCode(institute.institute_code)">
+            <i class="fas fa-folder-open"></i>
+          </span>
+          <span class="mr-3" data-toggle="tooltip" data-placement="top" title="Modificar" [routerLink]="'/institute/' + institute.institute_code"><i class="fas fa-edit"></i></span>
+          <span data-toggle="tooltip" data-placement="top" title="Eliminar"><i (click)="onPreDeleteInstitute(institute)" class="fas fa-trash-alt"></i></span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

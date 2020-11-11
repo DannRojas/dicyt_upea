@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    min-height: 100vh;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    height: 5%;
+}
+
+.w-75 {
+    width: 75%;
+    ;
+}
+
+.w-25 {
+    width: 25%;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.title {
+    color: white;
+}
+
+.white-text {
+    color: white;
+}

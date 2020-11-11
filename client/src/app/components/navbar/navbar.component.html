@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <a class="navbar-brand" href="#">
+        <ng-content></ng-content>
+        <img src="../../../assets/img/logo.png" width="50" height="40" class="d-inline-block align-top" alt=""> DICyT-UPEA
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item dropdown" routerLinkActive="active">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-align-justify"></i> DICyT
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" routerLink="/home"><i class="fas fa-home"></i>Home</a>
+                    <a class="dropdown-item" routerLink="/identity/">Quienes somos</a>
+                    <a class="dropdown-item" routerLink="/vicerrectorado">Vicerectorado</a>
+                    <a class="dropdown-item" routerLink="/director">Director DICyT</a>
+                    <a class="dropdown-item" routerLink="/personal">Personal Administrativo</a>
+                    <a class="dropdown-item" routerLink="/personal">Personal Tecnico</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" *ngIf="isLogin">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-university"></i> Inst. Investigación
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#"><i class="fas fa-university"></i> Institutos</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown" *ngIf="isLogin">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-project-diagram"></i> Proyectos IDH
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" routerLink="project/idh"><i class="fas fa-project-diagram"></i>proyectos</a>
+                </div>
+            </li>
+            <li class="nav-item" *ngIf="isLogin">
+                <a class="nav-link " role="button" routerLink="user/user-list" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user-plus"></i> New user
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ad"></i> Publicaciones
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">DICyT</a>
+                    <a class="dropdown-item" href="#">Carrera</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-percent"></i> Eventos Cientificos
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Congresos</a>
+                    <a class="dropdown-item" href="#">Cursos de actualizacion</a>
+                    <a class="dropdown-item" href="#">Seminarios</a>
+                </div>
+            </li>
+            <li class="nav-item" *ngIf="!isLogin">
+                <a class="nav-link " role="button" data-toggle="modal" data-target="#loginModal" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-sign-in-alt"></i> Inicio de Sesion
+                </a>
+            </li>
+            <li class="nav-item dropdown" *ngIf="isLogin">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-user"></i>{{user.names}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Perfil</a>
+                    <a class="dropdown-item" (click)="logout()">Cerrar sesión</a>
+                </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+</nav>
+
+<app-login></app-login>
